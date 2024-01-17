@@ -24,9 +24,16 @@ const SearchResult = () => {
 
     useEffect(() => {
         getSearchResults();
-    }, [searchParams]);
+    }, [searchParams]); 
 
-    return <div></div>;
+    return (
+        <div className='min-w-[1200px] max-w-[1300px] m-auto'>
+            {products &&
+                products.map((product, key) => {
+                    return <div key={key}>{product.title}</div>;
+                })}
+        </div>
+    );
 };
 
 export default SearchResult;

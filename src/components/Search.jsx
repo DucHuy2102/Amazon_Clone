@@ -5,7 +5,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 
 const Search = () => {
     const [suggestions, setSuggestions] = useState(null);
-    const [search, setSearch] = useState('');
+    const [searchTerm, setSearch] = useState('');
     const [category, setCategory] = useState('All');
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const Search = () => {
             pathname: 'search',
             search: `${createSearchParams({
                 category: `${category}`,
-                search: `${search}`,
+                searchTerm: `${searchTerm}`,
             })}`,
         });
         setSearch('');
@@ -50,7 +50,7 @@ const Search = () => {
                 <input
                     className='flex grow items-center h-[100%] rounded-l text-black'
                     type='text'
-                    value={search}
+                    value={searchTerm}
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <button className='w-[45px]' onClick={handleSubmit}>
@@ -61,7 +61,7 @@ const Search = () => {
                 <div className='bg-white text-black w-full z-40 absolute'>
                     {suggestions
                         .filter((suggestion) => {
-                            const currentSearch = search.toLowerCase();
+                            const currentSearch = searchTerm.toLowerCase();
                             const title = suggestion.title.toLowerCase();
                             return currentSearch && title.startsWith(currentSearch) && title !== currentSearch;
                         })
